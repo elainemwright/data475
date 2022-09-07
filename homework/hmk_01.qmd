@@ -1,0 +1,16 @@
+---
+title: "hmk_01"
+author: "Elaine M. Wright"
+format: gfm
+editor: visual
+---
+
+## Here we go??
+
+Maybe we finally get things to work correctly this time?
+
+## Running Code other than 1 + 1
+
+```{r}
+7 - 5 * 5
+```
