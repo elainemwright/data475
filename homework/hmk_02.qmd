@@ -1,0 +1,30 @@
+---
+title: "hmk_02"
+author: "Elaine M. Wright"
+format: gfm
+editor: visual
+---
+
+## Homework #2
+
+Here is the loaded library with the chunk option to hide the text that generates when the library loads into this R session!
+
+```{r, message=FALSE}
+library(tidyverse)
+
+a <- 5
+b <- 9
+a > b
+```
+
+```{r}
+ls(environment())
+```
+
+```{r}
+rm(list=ls())
+```
+
+```{r}
+ls(environment())
+```
