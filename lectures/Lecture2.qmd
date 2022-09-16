@@ -1,0 +1,88 @@
+---
+title: "Lecture2"
+author: "Elaine M. Wright"
+format: html
+editor: visual
+---
+
+## 09.09.22 - Lecture #2
+
+-   Read functions as verbs - they *do* things
+
+    -   functions returns results
+
+-   Creating
+
+-   make a sequence of integers starting with 7 and ending with 10 and assign them to the object/variable seq
+
+-   Objects/variables = nouns
+
+```{r}
+seq <- 7:10 
+print(seq)
+class(seq)
+
+# : is a shortcut for the seq function
+
+# = sign indicates the name of arguments that you are passing to a function
+
+# parameter and argument are sometimes interchangeable
+
+seq()
+
+seq(from =1, to = 7, by = 1.5)
+
+seq(1, 7, 1.5) # why does this work?
+
+seq(to = 7, by = 1.5, from = 1)
+```
+
+```{r}
+# why do we need to write rm(list = ls())
+# why is it that we cannot assume the name of the argument 
+#list = name of the argument 
+# when you do not name 'list', the rm function tries to assign the ls() to the '...' function 
+
+?rm
+```
+
+```{r}
+# Creating vectors with c() - c stands for concatonate
+height <- c(1.3, 2.7, 5.5)
+
+species <- c("oak", "pine", "baobab")
+
+index.num <- 1:3
+class(height)
+class(species)
+
+new.thing <- height + index.num
+new.thing
+class(new.thing)
+
+is.alive <- c(TRUE, TRUE, FALSE)
+is.cute <- c(TRUE, TRUE, TRUE)
+
+height + species
+species + species
+
+# double precision means it takes up 32 bites of memory 
+
+is.alive + is.cute
+
+# True = numeric 1, False = numeric 0
+
+# Concatonate vectors:
+heights <- c(height, height)
+class(heights)
+
+height.and.index <- c(height, index.num)
+class(height.and.index)
+
+#class of height and index is a numberic because R will default to the type that gives you more information/more general data type
+
+c(height, species)
+c(is.alive, species)
+
+# we always want to think about types of data we work with - figure that out via class function, also by the str()
+```

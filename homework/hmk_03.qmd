@@ -1,0 +1,112 @@
+---
+title: "hmk_03"
+author: "Elaine M. Wright"
+format: html
+editor: visual
+---
+
+# Data Input & Output
+
+-   This chunk of code loads the tidyverse package and silences/hides the message that displays when the tidyverse package and sub packages load in
+
+```{r, message = FALSE}
+library(tidyverse)
+```
+
+-   I made up a fake data set about cats, about their color, months of age, whether or not they like to play with feathers, what type of food they eat, and whether or not they like to play with chaser toys. I saved it as a .csv file within the same homework directory that I work in and ran the read.csv function.
+
+```{r, message = FALSE}
+library (tidyverse)
+
+read.csv("fake_data.csv")
+```
+
+# Investigating Data Frames Properties
+
+Use two different functions that both give some kind of summary or overview of the data frame. Which one do you think is more useful?
+
+-   The first function that gave a summary of the data frame used is the print function. The csv file is assigned to the object "cats," and the print function accesses the csv file through the object named "cats" and a summary of the file is printed to the screen in the form of a table.
+
+```{r, message = FALSE}
+library (tidyverse)
+
+read.csv("fake_data.csv")
+
+cats <- read_csv("fake_data.csv")
+
+print(cats)
+```
+
+-   The second function used was the structure function, this provides the class for the inputs as well as showing each category of data with a : and then denotes the structure type as well as the values within each category of data
+
+```{r, message = FALSE}
+library (tidyverse)
+
+read.csv("fake_data.csv")
+
+str(cats)
+```
+
+-   Currently, the print function is easier for me to use when wanting a summary of the data because it prints a nice table that is easy to read
+
+# Manipulating Data Frames
+
+-   To create a new column, I created a new object name to represent my new column, and then assigned the arithmetic operation to the name. I did this by accessing the numerical column of data with a \$, and then performed the multiplication operator by 5 to show me the age of the cats (in months) five years from now.
+
+-   Once the arithmetic function was completed, I created a new object name: newcats, and used the cbind function to add this new column to my original data set. The cbind function combines two objects together, the first parameter is the original data set, and the second parameter is the new column that you want added to the original data set.
+
+-   I then printed the new object to make sure the new column was added properly to the entire data set.
+
+```{r, message = FALSE}
+library (tidyverse)
+
+read.csv("fake_data.csv")
+
+cats <- read_csv("fake_data.csv")
+
+`Age In Five Years` <- cats$`Age (months)`*5
+
+newcats <- cbind(cats, `Age In Five Years`) 
+
+print(newcats)
+```
+
+# Working With Columns
+
+-   The mean function requires a numerical or logical value to function correctly. I first used the structure function to confirm the data type of my new column. I then used the mean function to calculate the mean of the new column.
+
+```{r, message = FALSE}
+library (tidyverse)
+
+read.csv("fake_data.csv")
+
+cats <- read_csv("fake_data.csv")
+
+`Age In Five Years` <- cats$`Age (months)`*5
+
+newcats <- cbind(cats, `Age In Five Years`) 
+
+print(newcats)
+
+str(`Age In Five Years`)
+
+mean(`Age In Five Years`)
+```
+
+# Accessing Elements of Data Frames
+
+-   newcats\[1\] - This calls the first column of the data frame and displays all the rows within only that column in the standard data frame table format
+-   newcats\[\[1\]\] - This notation calls the first column of the data frame and lists all the objects within the column as a series of individual words not in a table format
+-   newcats\$color - This format is how you directly access a portion of your data frame and manipulate it but does not
+-   newcats\[1, 1\] - This format prints the first item in the first column of the data frame
+-   newcats\[ , 1\] - This format prints every item in the first column, similar to the newcats\[\[1\]\] notation
+-   newcats\[1, \] - This format displays the first row of all columns in a table format
+
+```{r}
+newcats[1]
+newcats[[1]]
+newcats$color
+newcats[1, 1]
+newcats[ , 1]
+newcats[1, ]
+```

@@ -1,0 +1,111 @@
+---
+title: "Lecture1"
+author: "Elaine M. Wright"
+format: html
+editor: visual
+---
+
+# 09.07.22 - Lecture #1
+
+New class partners: Jake and Murry
+
+## Functions
+
+-   Functions are denoted with ( )
+
+```{r}
+# Read this as: call the sin function and pass it the argument 1
+sin(1)
+
+# This works but it is considered bad style
+sin (1)
+```
+
+-   Infix operators - "secret functions"
+
+    -   do not require parenthesis
+
+    -   (+), (\^), (\*)
+
+-   Logical operators (infix) - compares things and returns as T or F
+
+```{r}
+1 == 1
+1 == 2
+1 < 3
+1 <= 4
+1 != 1
+!TRUE
+```
+
+All of this R code is currently not in memory, this is because none of the code is currently assigned to an object
+
+## Assignment
+
+-   R will autoprint for you by just running the variable in the console
+
+-   R allows '=' to be used for assignment like in python, but we will not use this for assignment due to another function of the '=' within R
+
+```{r}
+x <- 1/40
+x # this is an example of autoprinting 
+x + 1
+
+y = 1/40
+
+# Assignment can also work in this order, not recommended
+1 -> d 
+```
+
+## Naming Objects
+
+-   R is **case sensitive**
+
+-   avoid capital letters for purpose of this class
+
+```{r}
+tree.heights # snake case
+treeHeights # camel case
+tree_heights #?
+tree.heights.v2 <- 4
+.tree.heights <- 3 #hidden variable
+
+print(.tree.heights)
+```
+
+## Legal & Illegal Naming of Objects
+
+```{r}
+min_height <- 2
+max.height <- 9
+_age <- 5       # Illegal variable name
+.mass <- 6      # Hidden variable
+MaxLength <- 7
+min-length <- 1 # This becomes a function
+2widths <- 12   # Illegal variable name
+celcius2kelvin <- 10
+```
+
+## Vectors
+
+-   Colons ( : ) denotes a sequence of integers from x to x
+
+```{r}
+1:5
+vec1 <- 1:5
+vec2 <- 6:10
+vec1 + vec2
+vec1 * vec2
+```
+
+-   We use vector functions whenever possible
+
+-   R also compiles per line instead of all at once like C does
+
+## Managing the Envrionment
+
+```{r}
+ls() # list objects in environment
+rm(celcius2kelvin)
+rm(list = ls()) # argument named list is given the value ls()
+```

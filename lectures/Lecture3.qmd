@@ -1,0 +1,57 @@
+---
+title: "Lecture 3"
+author: "Elaine M. Wright"
+format: html
+editor: visual
+---
+
+# 09.12.22 - Lecture #3
+
+## Reminder:
+
+-   Defining features of a vector:
+
+    -   Ordered group of things
+
+    -   Cannot mix types of things, only numbers or only strings
+
+## Data Frames:
+
+```{r, message=FALSE}
+library(tidyverse)
+
+cats <- data.frame(coat = c("calico", "black", "tabby", "tortie"), weight = c(2.1, 5.0, 3.2, 4.4), likes.string = c(TRUE, FALSE, TRUE, TRUE))
+
+print(cats)
+```
+
+-   Looking at this \^ table:
+
+    -   each row represents an individual
+
+    -   each column is a vector: a characteristic, question, etc.
+
+```{r}
+write_csv(x = cats, file = 'data/feline_data.csv') # tidyverse version: write_csv
+
+# for now, a tibble is the same as a data frame
+# tidyverse functions have names with _ separators
+
+read_cvs("data/feline_data.csv")
+
+# R can read and load the file, but we can't actually do anything with it, because it's not assigned to anything
+
+cats <- read_csv("data/feline_data.csv")
+# this assigns the csv file to an object so we can do things with it
+
+
+#access different columns of the data
+cats$weight # accesses a column of a data frame - $ operator allows this
+
+str(cats)
+
+# tidyverse function to look at it: 
+glimpse(cats)
+
+str(cats$weight)
+```
