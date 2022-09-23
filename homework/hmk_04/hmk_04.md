@@ -7,9 +7,9 @@ Elaine M. Wright
 -   The tidyverse library has been loaded in, and the messages are
     silenced
 
--   I created a fake data set about 30 cats, I ran the csv file to make
-    sure the data would load into the document accurately and I assigned
-    my csv file to an object for easy reference
+-   I created a fake data set about 30 random cats, I ran the csv file
+    to make sure the data would load into the document accurately and I
+    assigned my csv file to an object for easy reference
 
 -   Then I plotted a line graph of the Age vs Weight of all 30 cats.
     While the line graph is accurate in plotting this data, a scatter
