@@ -1,0 +1,22 @@
+---
+title: "Hmk_04"
+author: "Elaine M. Wright"
+format: gfm
+editor: visual
+---
+
+## Homework #4 - GGPlotting
+
+-   The tidyverse library has been loaded in, and the messages are silenced
+
+-   I created a fake data set about 30 cats, I ran the csv file to make sure the data would load into the document accurately and I assigned my csv file to an object for easy reference
+
+-   Then I plotted a line graph of the Age vs Weight of all 30 cats. While the line graph is accurate in plotting this data, a scatter plot would be better for this representation of Age vs Weight.
+
+```{r, message=FALSE}
+library(tidyverse)
+read.csv("cats_data_hmw_04.csv")
+cats <- read.csv("cats_data_hmw_04.csv")
+ggplot(cats) +
+  geom_line(aes(x=Age, y=Weight), color="purple")
+```
