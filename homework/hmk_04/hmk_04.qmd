@@ -11,7 +11,7 @@ editor: visual
 
 -   I created a fake data set about 30 random cats, I ran the csv file to make sure the data would load into the document accurately and I assigned my csv file to an object for easy reference
 
--   Then I plotted a line graph of the Age vs Weight of all 30 cats. While the line graph is accurate in plotting this data, a scatter plot would be better for this representation of Age vs Weight. The line plot is accurate in that it shows the proper points of age and weight, but the line plot is misleading. The line gives the idea that there is a direct correlation between each individual cat's age and corresponding weight. When in reality, a scatter plot would better represent this data because it would show the individual cats as points, denoting their corresponding age and weight, without the confusion that each indivudal cat's weight and age was connected to each other.
+-   Then I plotted a line graph of the Age vs Weight of all 30 cats. While the line graph is accurate in plotting this data, a scatter plot would be better for this representation of Age vs Weight. The line plot is accurate in that it shows the proper points of age and weight, but the line plot is misleading. The line gives the idea that there is a direct correlation between each individual cat's age and corresponding weight. When in reality, a scatter plot would better represent this data because it would show the individual cats as points, denoting their corresponding age and weight, without the confusion that each indivudal cat's weight and age was connected or correlated to each other.
 
 ```{r, message=FALSE}
 library(tidyverse)
