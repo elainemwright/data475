@@ -1,0 +1,57 @@
+---
+title: "Hmk_05"
+author: "Elaine M. Wright"
+format: gfm
+editor: visual
+---
+
+## Installing Packages:
+
+```{r, message=FALSE}
+library(nycflights13)
+library(tidyverse)
+
+#Test to make sure package loaded successfully
+nycflights13::flights
+```
+
+## Filtering:
+
+A plot of air time as a function of distance for all flights that meet the following criteria:
+
+-   originate from LaGuardia airport ("LGA")
+-   departed on the 16th of the month
+-   have a flight distance of less than 2000
+
+```{r}
+filtered <- filter(flights, origin == "LGA", day == 16, air_time < 2000)
+ggplot(filtered, aes(x=distance, y=air_time)) +
+  geom_point()
+```
+
+## Dealing With NA's:
+
+A new data frame of all of the rows of `flights` that have values for *both* `arr_time` and `dep_time`, where neither value is `NA`.
+
+```{r}
+filter(flights, arr_time != "NA" & dep_time != "NA")
+```
+
+## Filtering NA's:
+
+Preventing NA values from appearing in the first place can be done with `na.rm = TRUE`
+
+## Adding Columns:
+
+A new data frame was selected to show the airline carrier, the air time, and the distance of the flight. A new column was added to the data frame using `mutate()` showing the average flight speed based `air_time` and `distance`. A histogram plot was made and shows the average flight speed for every air line carrier.
+
+```{r}
+average <- select(flights, carrier, air_time, distance)
+mutate(average,
+       speed = distance / air_time)
+```
+
+```{r}
+ggplot(average, aes(x=carrier)) +
+  geom_histogram(stat = "count", color = "purple", fill = "white")
+```
