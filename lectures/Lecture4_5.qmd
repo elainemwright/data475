@@ -1,0 +1,40 @@
+---
+title: "Lecture4"
+author: "Elaine M. Wright"
+format: html
+editor: visual
+---
+
+## Lecture 4
+
+```{r, message=FALSE}
+library(tidyverse)
+
+```
+
+Questions:
+
+ggplot(mpg) +
+
+geom_point(aes(x=displ, y=hwy, color="blue"))
+
+```{r, message=FALSE}
+library(tidyverse)
+ggplot(mpg)+
+  geom_point(aes(x=displ, y=hwy), color = "purple", stroke=0)
+
+ggplot(mpg)+
+  geom_point(aes(x=displ, y=hwy, color = displ >=5))
+
+```
+
+map the same variable to multiple aes - can work: ex: y=hwy, color=hwy
+
+Lecture #5
+
+```{r, message=FALSE}
+library(tidyverse)
+ggplot(mpg, aes(x=displ, y=hwy))+
+  geom_point()+
+  geom_smooth()
+```

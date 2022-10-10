@@ -1,0 +1,47 @@
+---
+title: "Lecture6"
+author: "Elaine M. Wright"
+format: html
+editor: visual
+---
+
+## Lecture6
+
+```{r}
+library(tidyverse)
+view(diamonds)
+
+plot_maker <- function(df, title = "Title", x.col, y.col, x_label = "x-axis", y_label = "y axis"){
+  p <- 
+}
+```
+
+## Lecture 7 - Back to Data Wrangling
+
+```{r, message = FALSE}
+library(tidyverse)
+library(mtcars)
+view(mtcars)
+mutate(mtcars,
+       efficiency = hp / disp)
+ggplot(mtcars, aes(x=efficiency)) +
+  geom_density(color="purple", fill = "red")
+```
+
+```{r}
+library(tidyverse)
+library(mtcars)
+mtcars.carb <- group_by(mtcars, carb)
+qsec_carb <- summarise(mtcars.carb, mean.qsec = mean(qsec))
+
+ggplot(qsec_carb) +
+  geom_point(aes(x=carb, y=mean.qsec))
+```
+
+```{r}
+# pipes - feed results of one function straight into another function
+ 
+mean_hps <- mtcars %>% 
+  group_by(carb) %>%
+  summarise(mean.hp = mean(hp))
+```

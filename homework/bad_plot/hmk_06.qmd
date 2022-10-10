@@ -1,0 +1,82 @@
+---
+title: "BadPlot_Hmk_6"
+author: "Elaine M. Wright"
+format: gfm
+editor: visual
+---
+
+# Bad Plot - Hmk 06
+
+For my bad plot, I don't have any of my own research data, so I chose the readily available data set called Diamonds. I chose this data frame because it is large and has lots of variables to play around with. I included the variables and some basic information for context about the data I was working with.
+
+Diamonds: A data frame with 53940 rows and 10 variables:
+
+-   price: price in US dollars (\\\$326--\\\$18,823)
+
+-   carat: weight of the diamond (0.2--5.01)
+
+-   cut: quality of the cut (Fair, Good, Very Good, Premium, Ideal)
+
+-   color: diamond colour, from D (best) to J (worst)
+
+-   clarity: a measurement of how clear the diamond is (I1 (worst), SI2, SI1, VS2, VS1, VVS2, VVS1, IF (best))
+
+-   x: length in mm (0--10.74)
+
+-   y: width in mm (0--58.9)
+
+-   z: depth in mm (0--31.8)
+
+-   depth: total depth percentage = z / mean(x, y) = 2 \* z / (x + y) (43--79)
+
+-   table: width of top of diamond relative to widest point (43--95)
+
+## Why is this a bad plot?
+
+The biggest rule broken by this plot is one of Tufte's most clear cut rules for plots and visual aids - plots and other visualization tools should be inherently understandable. (Tufte, page 81) This plot is clearly not inherently understandable and in addition, even if you explain it, the plot still doesn't make any sense. This is primarily because the data loaded in this plot really has no purpose in being plotted. The x-axis is the "table" variable, and the y-axis is the color variable. These two variables have no correlation or relationship, and no new information is observed by plotting them together. This information would be more useful in a table rather than a plot of any kind. (Tufte, page 121)
+
+The other major violation of plot etiquette is the inherent "badness" of this plot. Wilke defines a "bad plot" as: "A figure that has problems related to perception; it may be unclear, confusing, overly complicated, or deceiving." (Wilkes, Introduction) This plot is definitely unclear, most certainly confusing, and also over complicated. The plot even qualifies as deceiving because of the type of geom used. `geom_jitter` is a type of scatter plot that automatically adds an amount of variation to the data points. In normal data, this is actually a helpful feature of the geom, because it allows for better distinction of individual plot points, and avoids overlapping data. In this plot, it does nothing but make the data presented even worse. In terms of the diamonds data set, the variation of the data points provided by `geom_jitter` also qualifies as unnecessary/false data manipulation. This breaks another Tufte rule which is quite simply, *do not* distort, hide, or falsely manipulate data. (Tufte, page 54)
+
+While there isn't a lot of excess clutter inside the graph itself in terms of random other figures or images, the data itself is cluttered, making each data point indistinguishable. This completely negates the purpose of a visualization tool to begin with. This plot also breaks rules regarding edges, contrasts, and colors. The color palette of the plot is not only unappealing to look at, but it is also difficult to look at for more than a few moments. The lack of a complementary color palette as well as varying hues and vividness highlights the problem of luminance perception discussed in 1.3.1 of Healy. Healy explains in this section that color can cause a lot of problems because so much of color interpretation is relative, not only between individuals but also within the plot itself dependent upon the color aspects the color is close to.
+
+According to Tufte, labeling is supposed to be helpful to the reader. The labels in this plot do not provide any helpful information, or even information at all. Not only are the labels difficult to read due to the size of the text and the colors used, they also give no context to the data or what the data represents. (Tufte, page 187)
+
+The scale in this plot is also off. First of all, the table data on the x-axis does not belong on the x-axis, and the color data on the y-axis does not belong on the y-axis. In addition to this, the x-axis starts around 40 (units unknown) and ranges to about 150. This distorts the data on the graph itself, and the data is not properly spread across the plot in an aesthetically pleasing manner. I also changed the aspect ratio of the plot, this also distorts the data presented and manipulates/hides data within the plot.
+
+Finally, the legends on the plot do not make any sense and are very difficult to read. The first legend towards the top is of 'x' which is actually a hidden data set within the filtered data frame but is not actually represented on the plot. The colors of the legend titles are also atrocious and difficult to read, and just for kicks they are also rotated at a 60 degree angle. The 'x' legend is also on a divergent color gradient scale which does not help interpret the data, and the 'color' legend is also useless. Not only are the sizes of each point indistinguishable but according to the legend they are all the same color. Even though that is not the case because of the code, the legend seems to have other ideas.
+
+## Is there a good version of this plot?
+
+I am honestly not sure there is a good version of this plot. I've come to this conclusion primarily because I don't think these two variables have a relationship worth analyzing, no new information is found by analyzing these two variables.
+
+## The Code Itself
+
+I was surprised to find that coding this monstrosity of a plot was actually fairly easy when discussing the code itself. My main method of making this terrible plot was primarily through the use of the theme function. I nested almost all of my disgusting plot ideas into this function, and it makes up the majority of my code for this mini project. The primary element of adusting all the theme settings was through text editing using `element_rect` and its associated options. The only geoms used were `geom_jitter` and `geom_smooth`, this allowed for the smooth and confusing data plot shown. Lastly, the `scale_color_gradient2` function allowed me to choose the scale of colors for my continuous data (even though my data was in no way continuous) which thankfully added to the chaos by making the colors even more unbearable to look at.
+
+```{r, message=FALSE}
+library(tidyverse)
+data <- select(diamonds, table, x, color)
+windowsFonts("Comic Sans MS" = windowsFont("Comic Sans MS"))
+
+g <- ggplot(data, aes(table, color, x)) +
+  labs(subtitle = "roks", title = "fancy carbon")
+       
+g + geom_jitter(aes(col=x, size=color))+
+  geom_smooth(aes(col=x), method="lm", se=F, color = "white")+
+  scale_color_gradient2(low='black', mid='yellow', high='green')+
+  ggtitle('fancy carbon')+
+  xlim(40,130)+
+  theme(
+    plot.title = element_text(vjust = 0, angle = 62, color="purple", size=10, face="bold.italic", family="Comic Sans MS"), 
+    plot.subtitle = element_text(hjust = 1, color = "red", vjust = 0.8, size = 15, family="Comic Sans MS"),
+    panel.background = element_rect(fill = "lightblue", color = "purple"), 
+    panel.grid.major = element_line(color="red", linetype = "dotted"),
+    axis.title.x = element_text(angle = 180, color = "gray", family="Comic Sans MS"), 
+    axis.title.y = element_text(angle=180, color="blue", size = 12, family="Comic Sans MS"), 
+    legend.title = element_text(angle = 75, color = "pink", family="Comic Sans MS"), 
+    legend.key.size = unit(1, "in"),
+    aspect.ratio = (2),
+    legend.key.width = unit(0.1, "in"),
+    legend.key.height = unit(0.1, "cm")
+    )
+```
