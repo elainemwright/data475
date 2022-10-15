@@ -1,0 +1,54 @@
+---
+title: "Lecture7"
+author: "Elaine M. Wright"
+format: html
+editor: visual
+---
+
+## Lecture 7
+
+```{r, message=FALSE}
+library(tidyverse)
+library(babynames)
+
+Elaine <- babynames %>%
+  filter(str_starts(name, "Elaine"))
+
+glimpse(Elaine)
+
+ggplot(Elaine, aes(x=year, y=n, color=sex)) +
+  geom_line()
+```
+
+```{r}
+Bill <- babynames %>% 
+  filter(str_starts(name, "Bill"))
+
+ggplot(Bill, aes(x=year, y=n, color=sex)) +
+  geom_point()
+```
+
+```{r}
+William <- babynames %>% 
+  filter(str_starts(name, "Bill"))
+
+ggplot(Bill, aes(x=year, y=n, color=sex)) +
+  geom_point()
+```
+
+```{r}
+JNames <- babynames %>% 
+  filter(str_starts(name, "J"))
+
+JNames <- JNames %>% 
+  group_by(year, sex)
+
+JNames <- JNames %>% 
+  summarize(
+    n = sum(n),
+    prop = sum(prop)
+  )
+
+ggplot(JNames) +
+  geom_line(aes(x=year, y=n, color=sex))
+```
