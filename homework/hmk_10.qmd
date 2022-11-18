@@ -1,0 +1,71 @@
+---
+title: "Homework 10: Decisions & Loops"
+author: "Elaine M. Wright"
+format: gfm
+editor: visual
+---
+
+# Decisions
+
+Write a function that accepts the current time as a parameter and prints "Good morning", "Good afternoon", or "Good evening" depending on the time. It is fine for the time to be in numeric format (e.g., `2317` for 11:17 pm). Bonus points if the function accepts time objects (see the `lubridate` package).
+
+```{r, message=FALSE}
+library(tidyverse)
+
+greeting <- function(time){
+    if (time > 0 & time < 1200){
+        print("Good Morning")} 
+    else if (time >= 1200 & time < 1800){
+      print("Good Afternoon")}
+    else if (time > 2401 | time < 0){
+      print("Please enter a valid time")}
+    else {
+      print("Good Evening")}
+    }
+
+greeting(1200)
+
+greeting(0600)
+
+greeting(0000)
+
+greeting(2600)
+
+greeting(-10)
+```
+
+-   The purpose of this function is to print a message to the console, so its primary purpose is a **side effect**. However, all functions must return something. What would be a logical value for this function to return?
+    -   I'm not sure how to actually write this in the code just yet, but I think a logical value for this function to return would be a True or False dependent upon whether the function successfully prints the correct message to the console.
+-   Should the function have default behavior in case the user does not pass an argument?
+    -   My initial thought for a default behavior would be to prompt the user for an argument if the user does not pass an argument the first time using the function. Again, I'm not certain how to implement this idea into the code, so far in my testing I haven't been able to figure this out, but I'm hoping I can soon! If my understanding is correct I think this is more of an 'error handling' situation.
+-   What would you like to happen if this function is passed the wrong data type (e.g., a negative number)?
+    -   To mitigate this, I made an `else if` statements that set "bounds" for the numbers input into the function. The statement returns the phrase "Please enter a valid time" to any value entered that is less than zero or greater than 2400.
+
+# Loops
+
+1.  Write a `for` loops that calculates the mean of each column of mtcars
+2.  Write a function (using a for loop) that calculates the mean of all numeric columns of *any* data frame. This function should be able to accept data frames with non-numeric columns.
+
+```{r, message=FALSE}
+library(tidyverse)
+view(mtcars)
+
+df <- mtcars
+
+means <- vector("double", length = ncol(df))
+
+for (i in 1:ncol(df)){
+  if (is.numeric(df[[i]])) {
+    means[i] <- mean(df[[i]]) 
+  }
+}
+
+print(means)
+
+```
+
+## Why not loops?
+
+In R, we generally encourage people to use vectorized functions instead of `for` loops. According to [your textbook](https://r4ds.had.co.nz/iteration.html), what is better about vectorized functions?
+
+According to our textbook, for loops are a great way to deliberately iterate in an obviously and clear way. However, for loops require lots of repeated code within each loop. Vectorized functions are encouraged because it offers a way to use patterns in a way that every loop has its own function, which results in higher efficiency and less error.
