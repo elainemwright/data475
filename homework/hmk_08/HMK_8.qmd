@@ -1,0 +1,53 @@
+---
+title: "HMK 8: Summarising, Reshaping, Merging"
+author: "Elaine M. Wright"
+format: html
+editor: visual
+---
+
+# Q1: Summarising operations and exploratory data analysis
+
+### Q1a
+
+Download `experiment1.csv` from Canvas (under files). This reports two variables from an experiment that has four treatments. Creatively, the treatments are `1`, `2`, `3`, and `4`, and the two variables are `x` and `y`.
+
+Create a data frame that contains the mean, standard deviation, and number of points for each treatment. You will want to use functions like `summarise()`, `group_by()`, `mean()`, and `sd()`.
+
+Are the data sets different in any important way?
+
+```{r, message = FALSE}
+library(tidyverse)
+df <- read.csv("experiment1.csv")
+view(df)
+
+dftx1 <- group_by(df, )
+
+
+# plot and facett the data
+```
+
+### Q1b
+
+Now load the file `experiment2.csv`. Again, this describes two variables for multiple treatments (here called `dataset`). Answer the same questions as above.
+
+# Q2: pivoting
+
+Create a plot that illustrates the differences in income among religions, using the `relig_income` data set that is built into tidyverse.
+
+You will need to create a tidy data frame to do this.
+
+# Q3: merging
+
+### Q3a: meaning of joins
+
+Explain the difference between a left join, a right join, an inner join, and an outer join.
+
+### Q3b: using joins
+
+Using the `flights` and `weather` data sets from `nycflights13`, determine whether there is a correlation between average hourly wind speed and departure delays at NY airports.
+
+This is a question about joins: you will need to join the `flights` and `weather` by year, month, day, and hour. However, note that `flights` has encoded departure time in a particularly annoying way: as an integers. For instance, the integer 517 indicates 5:17 am.
+
+`weather` gives average weather conditions each hour, with the hour given as an integer (e.g., 5 indicating 5-6 am). You're going to have to figure out how to convert the time in `flights` into a form that matches the form in `weather`.
+
+If you want, you can use the `lm()` function to make a linear model of departure delay as a function of wind speed. But it is also fine to just make a plot of the two variables with `geom_smooth()`.
