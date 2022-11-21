@@ -81,13 +81,9 @@ greeting(-10)
 
 1.  Write a `for` loops that calculates the mean of each column of
     mtcars
-2.  Write a function (using a for loop) that calculates the mean of all
-    numeric columns of *any* data frame. This function should be able to
-    accept data frames with non-numeric columns.
 
 ``` r
 library(tidyverse)
-view(mtcars)
 
 df <- mtcars
 
@@ -105,12 +101,36 @@ print(means)
      [1]  20.090625   6.187500 230.721875 146.687500   3.596563   3.217250
      [7]  17.848750   0.437500   0.406250   3.687500   2.812500
 
-## Why not loops?
+2.  Write a function (using a for loop) that calculates the mean of all
+    numeric columns of *any* data frame. This function should be able to
+    accept data frames with non-numeric columns.
 
-In R, we generally encourage people to use vectorized functions instead
-of `for` loops. According to [your
-textbook](https://r4ds.had.co.nz/iteration.html), what is better about
-vectorized functions?
+``` r
+library(tidyverse)
+
+mean_any_df <- function(df) {
+  
+  numeric_only <- select_if(df, is.numeric)
+  
+  mean_df <- vector("double", length = ncol(numeric_only))
+  
+  for (i in seq_along(numeric_only)){
+    mean_df[i] <- mean(numeric_only[[i]])
+  }
+  names(mean_df) <- colnames(numeric_only)
+  
+  mean_df
+}
+
+mean_any_df(diamonds)
+```
+
+           carat        depth        table        price            x            y 
+       0.7979397   61.7494049   57.4571839 3932.7997219    5.7311572    5.7345260 
+               z 
+       3.5387338 
+
+## Why not loops?
 
 According to our textbook, for loops are a great way to deliberately
 iterate in an obviously and clear way. However, for loops require lots

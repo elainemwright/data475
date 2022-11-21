@@ -44,11 +44,9 @@ greeting(-10)
 # Loops
 
 1.  Write a `for` loops that calculates the mean of each column of mtcars
-2.  Write a function (using a for loop) that calculates the mean of all numeric columns of *any* data frame. This function should be able to accept data frames with non-numeric columns.
 
 ```{r, message=FALSE}
 library(tidyverse)
-view(mtcars)
 
 df <- mtcars
 
@@ -61,11 +59,30 @@ for (i in 1:ncol(df)){
 }
 
 print(means)
+```
 
+2.  Write a function (using a for loop) that calculates the mean of all numeric columns of *any* data frame. This function should be able to accept data frames with non-numeric columns.
+
+```{r, message = FALSE}
+library(tidyverse)
+
+mean_any_df <- function(df) {
+  
+  numeric_only <- select_if(df, is.numeric)
+  
+  mean_df <- vector("double", length = ncol(numeric_only))
+  
+  for (i in seq_along(numeric_only)){
+    mean_df[i] <- mean(numeric_only[[i]])
+  }
+  names(mean_df) <- colnames(numeric_only)
+  
+  mean_df
+}
+
+mean_any_df(diamonds)
 ```
 
 ## Why not loops?
-
-In R, we generally encourage people to use vectorized functions instead of `for` loops. According to [your textbook](https://r4ds.had.co.nz/iteration.html), what is better about vectorized functions?
 
 According to our textbook, for loops are a great way to deliberately iterate in an obviously and clear way. However, for loops require lots of repeated code within each loop. Vectorized functions are encouraged because it offers a way to use patterns in a way that every loop has its own function, which results in higher efficiency and less error.
