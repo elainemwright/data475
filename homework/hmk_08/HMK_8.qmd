@@ -97,7 +97,7 @@ ggplot(df3, aes(x = Income, y = count, fill = religion)) +
 
 # Q3: Merging
 
-### Q3a: Meaning of Joins 
+### Q3a: Meaning of Joins
 
 **Explain the difference between a left join, a right join, an inner join, and an outer join.**
 

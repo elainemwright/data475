@@ -37,6 +37,14 @@ A new data frame of all of the rows of `flights` that have values for *both* `ar
 filter(flights, arr_time != "NA" & dep_time != "NA")
 ```
 
+```{r}
+# UPDATED BASED ON FEEDBACK:
+# New way to filter NA values:
+
+no_na <- filter(flights, !(is.na(air_time)|is.na(distance)))
+no_na
+```
+
 ## Filtering NA's:
 
 Preventing NA values from appearing in the first place can be done with `na.rm = TRUE`
@@ -48,10 +56,12 @@ A new data frame was selected to show the airline carrier, the air time, and the
 ```{r}
 average <- select(flights, carrier, air_time, distance)
 mutate(average,
-       speed = distance / air_time)
+       speed <- distance / air_time * 60)
+# Previously the air time was not multiplied by 60, multiplying by 60 actually gives the speed in mph
 ```
 
 ```{r}
-ggplot(average, aes(x=carrier)) +
-  geom_histogram(stat = "count", color = "purple", fill = "white")
+ggplot(average, aes(x=speed)) +
+  geom_density()+
+  xlab("Av. Speed (mph)")
 ```

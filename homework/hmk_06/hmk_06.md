@@ -15,9 +15,12 @@ carat values greater or equal to 3.
 
 ``` r
 library(tidyverse)
-view(diamonds)
+```
+
+    Warning: package 'stringr' was built under R version 4.2.2
+
+``` r
 w_o_three_carat <- filter(diamonds, carat <= 3)
-view(w_o_three_carat)
 ```
 
 Diamonds Data Set - Variables  
@@ -40,7 +43,25 @@ SI2, SI1, VS2, VS1, VVS2, VVS1, IF (best))
 
 **depth total percentage** = z / mean(x, y) = 2 \* z / (x + y)
 
-**table:** width of top of diamond relative to widest point
+**table:** width of top of diamond relative to widest point  
+
+``` r
+xvy <- select(diamonds, x, y)
+ggplot(xvy) +
+  geom_point(aes(x=x, y=y))
+```
+
+![](hmk_06_files/figure-gfm/unnamed-chunk-2-1.png)
+
+``` r
+# UPDATED: This graph shows the uneven distribution 
+# of the data, and shows the random data points, 
+# such as the data point at (0, 0) or that have a 
+# value for y but not a value for x. 
+# Another way to look at this data to observe 
+# bad data points would be to create facets and 
+# observe smaller chunks of data at a time
+```
 
 ### Exercise 2
 
@@ -61,7 +82,7 @@ ggplot(data = carat) +
   geom_bar(mapping = aes(x = carat))
 ```
 
-![](hmk_06_files/figure-gfm/unnamed-chunk-2-1.png)
+![](hmk_06_files/figure-gfm/unnamed-chunk-3-1.png)
 
 ``` r
 carat %>% 
@@ -96,7 +117,7 @@ diamonds %>%
     geom_tile(mapping = aes(fill = n))
 ```
 
-![](hmk_06_files/figure-gfm/unnamed-chunk-4-1.png)
+![](hmk_06_files/figure-gfm/unnamed-chunk-5-1.png)
 
 ``` r
 diamonds %>% 
@@ -105,7 +126,7 @@ diamonds %>%
     geom_tile(mapping = aes(fill = n))
 ```
 
-![](hmk_06_files/figure-gfm/unnamed-chunk-5-1.png)
+![](hmk_06_files/figure-gfm/unnamed-chunk-6-1.png)
 
 ### Exercise 4 - From 7.5.3.1
 
@@ -128,7 +149,7 @@ ggplot(big_diamonds, aes(x = carat, y = price)) +
   geom_point()
 ```
 
-![](hmk_06_files/figure-gfm/unnamed-chunk-6-1.png)
+![](hmk_06_files/figure-gfm/unnamed-chunk-7-1.png)
 
 ``` r
 small_diamonds <- filter(diamonds, carat <= 2.00)
@@ -136,4 +157,4 @@ ggplot(small_diamonds, aes(x = carat, y = price)) +
   geom_point()
 ```
 
-![](hmk_06_files/figure-gfm/unnamed-chunk-7-1.png)
+![](hmk_06_files/figure-gfm/unnamed-chunk-8-1.png)

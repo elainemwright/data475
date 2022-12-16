@@ -13,9 +13,7 @@ I think some data that qualifies as bad within this data set is any diamond with
 
 ```{r, message = FALSE}
 library(tidyverse)
-view(diamonds)
 w_o_three_carat <- filter(diamonds, carat <= 3)
-view(w_o_three_carat)
 ```
 
 Diamonds Data Set - Variables
@@ -38,7 +36,21 @@ Diamonds Data Set - Variables
 
     **depth total percentage** = z / mean(x, y) = 2 \* z / (x + y)
 
-    **table:** width of top of diamond relative to widest point
+    **table:** width of top of diamond relative to widest point\
+
+```{r}
+xvy <- select(diamonds, x, y)
+ggplot(xvy) +
+  geom_point(aes(x=x, y=y))
+
+# UPDATED: This graph shows the uneven distribution 
+# of the data, and shows the random data points, 
+# such as the data point at (0, 0) or that have a 
+# value for y but not a value for x. 
+# Another way to look at this data to observe 
+# bad data points would be to create facets and 
+# observe smaller chunks of data at a time
+```
 
 ### Exercise 2
 
